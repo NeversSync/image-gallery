@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch, Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
 import AddImage from './AddImage';
-import albumApi from '../data';
+import albumApi from '../services/albumApi';
 import Thumbnail from './Thumbnail';
 import List from './List';
 import Gallery from './Gallery';
@@ -36,20 +35,23 @@ class AlbumDetail extends Component {
     this.getAlbumWrapper(match.params.albumId);
   }
 
-  onDeleteImage(id) {
-    albumApi.deleteImage(id)
+  onDeleteImage(imageId) {
+    albumApi.deleteImage(imageId, this.state.album._id)
       .then(() => {
-        const album = this.state.album;
-        const index = album.images.findIndex(img => img._id === id);
-        album.images.splice(index, 1);
-        this.setState({ album });
+        const images = this.state.album.images.slice();
+        const index = images.findIndex(img => img._id === imageId);
+        images.splice(index, 1);
+         
+        const updatedAlbum = Object.assign({}, this.state.album );
+        updatedAlbum.images = [...images];
+        this.setState({ album: updatedAlbum });
       });
   }
 
   onAddImage(image) {
-    albumApi.AddImage(image, this.state.album._id)
+    albumApi.addImage(image, this.state.album._id)
       .then(image => {
-        const updatedAlbum = Object.assign({}, this.state.album, );
+        const updatedAlbum = Object.assign({}, this.state.album );
         updatedAlbum.images = [...this.state.album.images, image];
 
         this.setState({
