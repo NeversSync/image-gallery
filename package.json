@@ -6,7 +6,11 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "test": "cd tea-gallery-app && npm i && npm test"
+    "test": "cd tea-gallery-app && npm i && npm test",
+    "test:watch": "npm run test -- -w",
+    "test:unit": "mocha test/unit",
+    "test:e2e": "mocha test/e2e",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
