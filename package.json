@@ -10,7 +10,7 @@
     "test:watch": "npm run test -- -w",
     "test:unit": "mocha test/unit",
     "test:e2e": "mocha test/e2e",
-    "start": "node server.js"
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
