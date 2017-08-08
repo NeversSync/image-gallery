@@ -6,7 +6,7 @@ const errorHandler = require('./error-handler');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use(express.static('./public'));
+app.use(express.static('./public/build'));
 
 const albums = require('./routes/albums');
 
